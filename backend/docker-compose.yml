@@ -4,7 +4,7 @@ services:
     container_name: inventory_mssql_container
     environment:
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=Strong_Password_123!
+      - MSSQL_SA_PASSWORD=Str0ngP@ssw0rd!
       - MSSQL_PID=Developer
     ports:
       - "1433:1433"
