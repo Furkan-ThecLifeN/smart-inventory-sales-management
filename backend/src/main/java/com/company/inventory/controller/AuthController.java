@@ -4,6 +4,7 @@ import com.company.inventory.dto.AuthRequestDto;
 import com.company.inventory.dto.AuthResponseDto;
 import com.company.inventory.dto.UserRequestDto;
 import com.company.inventory.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserRequestDto request) {
+    public ResponseEntity<String> register(@Valid @RequestBody UserRequestDto request) {
         return ResponseEntity.ok(authService.register(request));
     }
 
