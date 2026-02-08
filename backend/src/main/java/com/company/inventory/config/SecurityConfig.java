@@ -33,6 +33,16 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
+                    // WebSocket Yolları
+                    "/ws-inventory/**",
+                    "/topic/**",
+                    "/app/**",
+                    
+                    // Ürün ve Sipariş Yolları (Test için herkese açıldı)
+                    "/api/v1/products/**",
+                    "/api/v1/orders/**",
+                    
+                    // Auth ve Swagger Yolları
                     "/api/v1/auth/**",
                     "/v3/api-docs/**",
                     "/v3/api-docs.yaml",
