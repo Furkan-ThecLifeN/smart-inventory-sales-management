@@ -28,4 +28,11 @@ public class ProductController {
     public ResponseEntity<ProductResponseDto> createProduct(@Valid @RequestBody ProductRequestDto dto) {
         return ResponseEntity.ok(productService.createProduct(dto));
     }
+
+    // TEST İÇİN EKLENEN METOT: WebSocket'i tetiklemek için burayı çağıracağız
+    @PutMapping("/{id}/decrease")
+    public ResponseEntity<String> decreaseStock(@PathVariable Long id, @RequestParam int quantity) {
+        productService.decreaseStock(id, quantity);
+        return ResponseEntity.ok("Stok düşürüldü, eğer eşik değerin altındaysa uyarı gönderildi.");
+    }
 }

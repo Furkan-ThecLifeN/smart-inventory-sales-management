@@ -46,4 +46,15 @@ public class CustomerService {
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
         return customerMapper.toDto(customer);
     }
+
+    // EKSİK OLAN VE HATAYA SEBEP OLAN METOT BURASIYDI:
+    @Transactional
+    public void deleteCustomer(Long id) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
+        
+        // Veriyi tamamen silmek yerine 'deleted' olarak işaretliyoruz
+        customer.setDeleted(true);
+        customerRepository.save(customer);
+    }
 }

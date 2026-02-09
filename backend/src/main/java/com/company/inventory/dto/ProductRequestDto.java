@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 @Data
 public class ProductRequestDto {
+
     @NotBlank(message = "Ürün adı zorunludur")
     private String name;
 
@@ -22,4 +23,6 @@ public class ProductRequestDto {
 
     @Min(value = 0, message = "Stok miktarı negatif olamaz")
     private Integer stockQuantity;
+
+    private Boolean active;
 }

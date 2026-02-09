@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,13 +31,12 @@ public class AuthService {
         var user = new User();
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword())); // Şifre Hashleme
-        
-        // Varsayılan olarak SALES rolü ata
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
         var salesRole = roleRepository.findByName(ERole.ROLE_SALES)
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
         user.setRoles(Set.of(salesRole));
-        
+
         userRepository.save(user);
         return "User registered successfully";
     }
@@ -45,12 +45,21 @@ public class AuthService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
-        var user = userDetailsService.loadUserByUsername(request.getUsername());
-        var jwtToken = jwtService.generateToken(user);
-        
+
+        User userEntity = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        var roles = userEntity.getRoles().stream()
+                .map(role -> role.getName().name())
+                .collect(Collectors.toList());
+
+        var userDetails = userDetailsService.loadUserByUsername(request.getUsername());
+        var jwtToken = jwtService.generateToken(userDetails);
+
         return AuthResponseDto.builder()
                 .accessToken(jwtToken)
                 .username(request.getUsername())
+                .roles(roles)
                 .build();
     }
 }

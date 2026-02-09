@@ -28,4 +28,16 @@ public class CustomerController {
     public ResponseEntity<List<CustomerResponseDto>> getAllCustomers() {
         return ResponseEntity.ok(customerService.getAllCustomers());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomerResponseDto> getCustomerById(@PathVariable Long id) {
+        return ResponseEntity.ok(customerService.getCustomerById(id));
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
+        customerService.deleteCustomer(id);
+        return ResponseEntity.ok().build();
+    }
 }
