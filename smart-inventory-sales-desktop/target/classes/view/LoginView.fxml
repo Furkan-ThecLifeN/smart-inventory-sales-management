@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.company.inventory.desktop.controller.LoginController"
+      alignment="CENTER"
+      spacing="20.0"
+      style="-fx-background-color: #f4f4f4;">
+
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <Label text="SMART INVENTORY"
+           style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+    <Label text="Masaüstü Terminali"
+           style="-fx-font-size: 14; -fx-text-fill: #7f8c8d;"/>
+
+    <TextField fx:id="usernameField"
+               promptText="Kullanıcı Adı"
+               prefHeight="40.0"/>
+
+    <PasswordField fx:id="passwordField"
+                   promptText="Şifre"
+                   prefHeight="40.0"/>
+
+    <Button text="Giriş Yap"
+            onAction="#handleLogin"
+            prefWidth="400.0"
+            prefHeight="40.0"
+            style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-cursor: hand;"/>
+
+    <Label fx:id="errorLabel"
+           textFill="RED"/>
+
+</VBox>

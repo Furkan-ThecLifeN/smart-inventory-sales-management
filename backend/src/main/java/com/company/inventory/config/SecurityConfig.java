@@ -24,10 +24,11 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity // Controller'lardaki @PreAuthorize kullanımını aktif eder
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -40,7 +41,6 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-                // 1. Herkese açık endpoint'ler
                 .requestMatchers(
                     "/ws-inventory/**",
                     "/topic/**",
@@ -51,17 +51,10 @@ public class SecurityConfig {
                     "/v3/api-docs/**",
                     "/v3/api-docs.yaml"
                 ).permitAll()
-
-                // 2. Müşteri Silme: Sadece ADMIN
-                .requestMatchers(HttpMethod.DELETE, "/api/v1/customers/**").hasAuthority("ROLE_ADMIN")
-                
-                // 3. Ürün ve Müşteri Görüntüleme/Ekleme: ADMIN, SALES veya MANAGER
-                // Not: Controller üzerindeki @PreAuthorize ile çakışmaması için burada genel izin verip
-                // yetkiyi metod düzeyinde yönetmek daha sağlıklıdır.
-                .requestMatchers("/api/v1/customers/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_SALES")
-                .requestMatchers("/api/v1/products/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
-
-                // 4. Geri kalan her şey için giriş yapmış olmak yeterli
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/customers/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/customers/**").hasAnyRole("ADMIN", "SALES", "MANAGER")
+                .requestMatchers("/api/v1/products/**").hasAnyRole("ADMIN", "MANAGER", "SALES")
+                .requestMatchers("/api/v1/dashboard/**").hasAnyRole("ADMIN", "MANAGER", "SALES")
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -76,6 +69,7 @@ public class SecurityConfig {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setHideUserNotFoundExceptions(false);
         return authProvider;
     }
 
@@ -92,16 +86,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Frontend adresin
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        // Tüm HTTP metodlarına izin ver
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        // Header'larda Authorization'ı mutlaka kabul et
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept"));
+        configuration.setAllowedOriginPatterns(List.of("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setExposedHeaders(List.of("Authorization"));
         configuration.setAllowCredentials(true);
-        // Pre-flight (OPTIONS) isteklerinin önbelleğe alınma süresi
-        configuration.setMaxAge(3600L); 
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

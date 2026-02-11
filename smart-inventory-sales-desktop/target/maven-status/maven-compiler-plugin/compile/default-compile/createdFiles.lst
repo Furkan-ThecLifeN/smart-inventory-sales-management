@@ -1,0 +1,11 @@
+com\company\inventory\desktop\util\UserSession.class
+com\company\inventory\desktop\model\AuthResponseDto.class
+com\company\inventory\desktop\client\ApiClient.class
+com\company\inventory\desktop\service\ProductService$1.class
+com\company\inventory\desktop\controller\DashboardController.class
+com\company\inventory\desktop\controller\MainController.class
+com\company\inventory\desktop\model\ProductDto.class
+com\company\inventory\desktop\service\WebSocketClientService.class
+com\company\inventory\desktop\controller\LoginController.class
+com\company\inventory\desktop\InventoryDesktopApplication.class
+com\company\inventory\desktop\service\ProductService.class

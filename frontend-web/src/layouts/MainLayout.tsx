@@ -2,13 +2,7 @@ import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { RoleGuard } from "../components/RoleGuard";
 import { useAuth } from "../store/AuthContext";
-import { 
-  LayoutDashboard, 
-  Package, 
-  Users, 
-  LogOut, 
-  Box 
-} from "lucide-react"; // npm install lucide-react
+import { LayoutDashboard, Package, Users, LogOut, Box } from "lucide-react"; // npm install lucide-react
 
 export const MainLayout: React.FC = () => {
   const { logout } = useAuth();
@@ -29,31 +23,62 @@ export const MainLayout: React.FC = () => {
   });
 
   return (
-    <div style={{ display: "flex", height: "100vh", fontFamily: "'Inter', sans-serif" }}>
-      {/* Sidebar */}
-      <aside style={{ 
-        width: 280, 
-        background: "#1a202c", 
-        color: "white", 
-        padding: "24px",
+    <div
+      style={{
         display: "flex",
-        flexDirection: "column",
-        boxShadow: "4px 0 10px rgba(0,0,0,0.1)"
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "40px" }}>
+        height: "100vh",
+        fontFamily: "'Inter', sans-serif",
+      }}
+    >
+      {/* Sidebar */}
+      <aside
+        style={{
+          width: 280,
+          background: "#1a202c",
+          color: "white",
+          padding: "24px",
+          display: "flex",
+          flexDirection: "column",
+          boxShadow: "4px 0 10px rgba(0,0,0,0.1)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            marginBottom: "40px",
+          }}
+        >
           <Box size={32} color="#63b3ed" />
-          <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", margin: 0, letterSpacing: "-0.5px" }}>
+          <h2
+            style={{
+              fontSize: "1.25rem",
+              fontWeight: "bold",
+              margin: 0,
+              letterSpacing: "-0.5px",
+            }}
+          >
             Smart Inventory
           </h2>
         </div>
 
-        <nav style={{ display: "flex", flexDirection: "column", gap: "8px", flex: 1 }}>
+        <nav
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+            flex: 1,
+          }}
+        >
           <Link to="/dashboard" style={getLinkStyle("/dashboard") as any}>
             <LayoutDashboard size={20} />
             Dashboard
           </Link>
 
-          <RoleGuard allowedRoles={["ROLE_ADMIN", "ROLE_MANAGER"]}>
+          <RoleGuard
+            allowedRoles={["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SALES"]}
+          >
             <Link to="/products" style={getLinkStyle("/products") as any}>
               <Package size={20} />
               Ürün Yönetimi
@@ -68,7 +93,13 @@ export const MainLayout: React.FC = () => {
           </RoleGuard>
         </nav>
 
-        <div style={{ marginTop: "auto", paddingTop: "20px", borderTop: "1px solid #2d3748" }}>
+        <div
+          style={{
+            marginTop: "auto",
+            paddingTop: "20px",
+            borderTop: "1px solid #2d3748",
+          }}
+        >
           <button
             onClick={logout}
             style={{
@@ -83,10 +114,14 @@ export const MainLayout: React.FC = () => {
               border: "none",
               cursor: "pointer",
               transition: "background 0.3s ease",
-              fontSize: "1rem"
+              fontSize: "1rem",
             }}
-            onMouseOver={(e) => (e.currentTarget.style.background = "rgba(254, 178, 178, 0.2)")}
-            onMouseOut={(e) => (e.currentTarget.style.background = "rgba(254, 178, 178, 0.1)")}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.background = "rgba(254, 178, 178, 0.2)")
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.background = "rgba(254, 178, 178, 0.1)")
+            }
           >
             <LogOut size={20} />
             Çıkış Yap
@@ -95,13 +130,15 @@ export const MainLayout: React.FC = () => {
       </aside>
 
       {/* Main Content */}
-      <main style={{ 
-        flex: 1, 
-        padding: "40px", 
-        background: "#f8fafc", 
-        overflowY: "auto",
-        position: "relative"
-      }}>
+      <main
+        style={{
+          flex: 1,
+          padding: "40px",
+          background: "#f8fafc",
+          overflowY: "auto",
+          position: "relative",
+        }}
+      >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <Outlet />
         </div>
