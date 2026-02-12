@@ -24,13 +24,14 @@ public class ProductController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    // DÜZELTME: SecurityConfig ile uyumlu olması için SALES eklendi
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER', 'SALES', 'USER')")
     public ResponseEntity<ProductResponseDto> createProduct(@Valid @RequestBody ProductRequestDto dto) {
         return ResponseEntity.ok(productService.createProduct(dto));
     }
 
-    // TEST İÇİN EKLENEN METOT: WebSocket'i tetiklemek için burayı çağıracağız
     @PutMapping("/{id}/decrease")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER', 'SALES', 'USER')")
     public ResponseEntity<String> decreaseStock(@PathVariable Long id, @RequestParam int quantity) {
         productService.decreaseStock(id, quantity);
         return ResponseEntity.ok("Stok düşürüldü, eğer eşik değerin altındaysa uyarı gönderildi.");

@@ -1,10 +1,17 @@
-C:\Users\fkara\Desktop\Projects\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\controller\LoginController.java
-C:\Users\fkara\Desktop\Projects\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\util\UserSession.java
-C:\Users\fkara\Desktop\Projects\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\client\ApiClient.java
-C:\Users\fkara\Desktop\Projects\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\model\AuthResponseDto.java
-C:\Users\fkara\Desktop\Projects\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\InventoryDesktopApplication.java
-C:\Users\fkara\Desktop\Projects\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\model\ProductDto.java
-C:\Users\fkara\Desktop\Projects\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\service\ProductService.java
-C:\Users\fkara\Desktop\Projects\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\controller\MainController.java
-C:\Users\fkara\Desktop\Projects\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\service\WebSocketClientService.java
-C:\Users\fkara\Desktop\Projects\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\controller\DashboardController.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\InventoryDesktopApplication.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\controller\ProductsController.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\service\WebSocketClientService.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\sync\ConflictResolver.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\model\ProductDto.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\repository\ProductLocalRepository.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\controller\MainController.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\model\LocalProductDto.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\client\ApiClient.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\controller\LoginController.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\config\DatabaseConfig.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\controller\DashboardController.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\model\AuthResponseDto.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\util\ConnectivityService.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\sync\SyncManager.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\util\UserSession.java
+C:\Users\fkara\Desktop\Projects\Smart Inventory & Sales Management System\smart-inventory-sales-management\smart-inventory-sales-desktop\src\main\java\com\company\inventory\desktop\service\ProductService.java

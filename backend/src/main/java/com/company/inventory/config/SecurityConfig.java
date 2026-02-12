@@ -52,9 +52,10 @@ public class SecurityConfig {
                     "/v3/api-docs.yaml"
                 ).permitAll()
                 .requestMatchers(HttpMethod.DELETE, "/api/v1/customers/**").hasRole("ADMIN")
-                .requestMatchers("/api/v1/customers/**").hasAnyRole("ADMIN", "SALES", "MANAGER")
-                .requestMatchers("/api/v1/products/**").hasAnyRole("ADMIN", "MANAGER", "SALES")
-                .requestMatchers("/api/v1/dashboard/**").hasAnyRole("ADMIN", "MANAGER", "SALES")
+                .requestMatchers("/api/v1/customers/**").hasAnyRole("ADMIN", "SALES", "MANAGER", "USER")
+                // DÜZELTME: USER rolü ürünler ve dashboard için eklendi
+                .requestMatchers("/api/v1/products/**").hasAnyRole("ADMIN", "MANAGER", "SALES", "USER")
+                .requestMatchers("/api/v1/dashboard/**").hasAnyRole("ADMIN", "MANAGER", "SALES", "USER")
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

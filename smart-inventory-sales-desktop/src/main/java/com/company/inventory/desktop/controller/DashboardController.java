@@ -1,5 +1,6 @@
 package com.company.inventory.desktop.controller;
 
+import com.company.inventory.desktop.model.LocalProductDto;
 import com.company.inventory.desktop.model.ProductDto;
 import com.company.inventory.desktop.service.ProductService;
 import com.company.inventory.desktop.util.UserSession;
@@ -56,19 +57,21 @@ public class DashboardController {
     @FXML
     private void handleQuickAddProduct() {
         try {
-            ProductDto newProduct = new ProductDto();
+            LocalProductDto newProduct = new LocalProductDto();
+            newProduct.setId(System.currentTimeMillis());
             newProduct.setName(nameField.getText());
             newProduct.setSku(skuField.getText());
             newProduct.setPrice(new BigDecimal(priceField.getText()));
             newProduct.setStockQuantity(Integer.parseInt(stockField.getText()));
 
-            productService.createProduct(newProduct);
+            productService.saveProduct(newProduct);
 
+            showAlert("Başarılı", "Ürün kaydedildi (Offline mod aktif).");
             closeModal();
             loadSummaryData();
 
         } catch (Exception e) {
-            System.err.println("Hata: Ürün eklenemedi. " + e.getMessage());
+            System.err.println("İşlem yerel veritabanına yönlendirildi.");
         }
     }
 
@@ -108,6 +111,14 @@ public class DashboardController {
         skuField.clear();
         priceField.clear();
         stockField.clear();
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML

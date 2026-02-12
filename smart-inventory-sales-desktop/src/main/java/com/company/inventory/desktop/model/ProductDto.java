@@ -1,4 +1,3 @@
-
 package com.company.inventory.desktop.model;
 
 import lombok.Data;
@@ -12,4 +11,5 @@ public class ProductDto {
     private BigDecimal price;
     private Integer stockQuantity;
     private boolean active;
+    private Long version; 
 }
