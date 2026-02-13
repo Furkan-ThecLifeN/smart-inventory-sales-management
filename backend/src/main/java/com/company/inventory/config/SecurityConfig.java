@@ -37,30 +37,37 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
-            .cors(Customizer.withDefaults())
-            .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/ws-inventory/**",
-                    "/topic/**",
-                    "/app/**",
-                    "/api/v1/auth/**",
-                    "/swagger-ui/**",
-                    "/swagger-ui.html",
-                    "/v3/api-docs/**",
-                    "/v3/api-docs.yaml"
-                ).permitAll()
-                .requestMatchers(HttpMethod.DELETE, "/api/v1/customers/**").hasRole("ADMIN")
-                .requestMatchers("/api/v1/customers/**").hasAnyRole("ADMIN", "SALES", "MANAGER", "USER")
-                // DÜZELTME: USER rolü ürünler ve dashboard için eklendi
-                .requestMatchers("/api/v1/products/**").hasAnyRole("ADMIN", "MANAGER", "SALES", "USER")
-                .requestMatchers("/api/v1/dashboard/**").hasAnyRole("ADMIN", "MANAGER", "SALES", "USER")
-                .anyRequest().authenticated()
-            )
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authenticationProvider())
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+
+                        .requestMatchers("/actuator/**").permitAll()
+
+                        .requestMatchers(
+                                "/ws-inventory/**",
+                                "/topic/**",
+                                "/app/**",
+                                "/api/v1/auth/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/v3/api-docs.yaml")
+                        .permitAll()
+
+                        // 🔥 DEBUG: Ürün POST endpoint tamamen açık
+                        .requestMatchers(HttpMethod.POST, "/api/v1/products").permitAll()
+
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/customers/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/customers/**").hasAnyRole("ADMIN", "SALES", "MANAGER", "USER")
+                        .requestMatchers("/api/v1/products/**").hasAnyRole("ADMIN", "MANAGER", "SALES", "USER")
+                        .requestMatchers("/api/v1/dashboard/**").hasAnyRole("ADMIN", "MANAGER", "SALES", "USER")
+
+                        .anyRequest().authenticated())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

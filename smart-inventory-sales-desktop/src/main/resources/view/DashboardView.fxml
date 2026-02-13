@@ -19,9 +19,9 @@
             <VBox HBox.hgrow="ALWAYS">
                 <Label fx:id="welcomeLabel"
                        text="Hoş geldiniz!"
-                       style="-fx-font-size: 14px; -fx-text-fill: #a0aec0;"/>
+                       style="-fx-font-size: 14px; -fx-text-fill: #a0aec0;" />
                 <Label text="Kontrol Paneli"
-                       style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                       style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;" />
             </VBox>
             <Button text="Oturumu Kapat"
                     onAction="#handleLogout"
@@ -30,16 +30,16 @@
                            -fx-background-radius: 12;
                            -fx-padding: 10 20;
                            -fx-cursor: hand;
-                           -fx-border-color: transparent;"/>
+                           -fx-border-color: transparent;" />
         </HBox>
 
         <VBox spacing="35" style="-fx-padding: 40;" VBox.vgrow="ALWAYS">
 
             <GridPane hgap="25" vgap="25">
                 <columnConstraints>
-                    <ColumnConstraints percentWidth="33.3"/>
-                    <ColumnConstraints percentWidth="33.3"/>
-                    <ColumnConstraints percentWidth="33.3"/>
+                    <ColumnConstraints percentWidth="33.3" />
+                    <ColumnConstraints percentWidth="33.3" />
+                    <ColumnConstraints percentWidth="33.3" />
                 </columnConstraints>
 
                 <VBox spacing="12"
@@ -50,12 +50,12 @@
                     <Label text="📦 TOPLAM STOK"
                            style="-fx-text-fill: rgba(255,255,255,0.8);
                                   -fx-font-size: 13px;
-                                  -fx-font-weight: bold;"/>
+                                  -fx-font-weight: bold;" />
                     <Label fx:id="totalProductsLabel"
                            text="0"
                            style="-fx-text-fill: white;
                                   -fx-font-size: 38px;
-                                  -fx-font-weight: 800;"/>
+                                  -fx-font-weight: 800;" />
                 </VBox>
 
                 <VBox spacing="12"
@@ -66,12 +66,12 @@
                     <Label text="⚠️ KRİTİK SEVİYE"
                            style="-fx-text-fill: rgba(255,255,255,0.8);
                                   -fx-font-size: 13px;
-                                  -fx-font-weight: bold;"/>
+                                  -fx-font-weight: bold;" />
                     <Label fx:id="lowStockLabel"
                            text="0"
                            style="-fx-text-fill: white;
                                   -fx-font-size: 38px;
-                                  -fx-font-weight: 800;"/>
+                                  -fx-font-weight: 800;" />
                 </VBox>
 
                 <VBox spacing="15"
@@ -83,7 +83,7 @@
                     <Label text="⚡ HIZLI İŞLEMLER"
                            style="-fx-text-fill: #cbd5e0;
                                   -fx-font-size: 12px;
-                                  -fx-font-weight: bold;"/>
+                                  -fx-font-weight: bold;" />
                     <Button fx:id="productManageBtn"
                             text="📦 Ürünleri Yönet"
                             maxWidth="Infinity"
@@ -92,7 +92,7 @@
                                    -fx-background-radius: 10;
                                    -fx-padding: 12;
                                    -fx-cursor: hand;
-                                   -fx-border-color: transparent;"/>
+                                   -fx-border-color: transparent;" />
                     <Button text="➕ Hızlı Ürün Ekle"
                             onAction="#showAddProductModal"
                             maxWidth="Infinity"
@@ -102,7 +102,16 @@
                                    -fx-border-radius: 10;
                                    -fx-background-radius: 10;
                                    -fx-padding: 10;
-                                   -fx-cursor: hand;"/>
+                                   -fx-cursor: hand;" />
+                    <Button text="👤 Yeni Müşteri Ekle"
+                            onAction="#showAddCustomerModal"
+                            maxWidth="Infinity"
+                            style="-fx-background-color: transparent;
+                                   -fx-text-fill: white;
+                                   -fx-border-color: #6366f1;
+                                   -fx-border-radius: 10;
+                                   -fx-padding: 10;
+                                   -fx-cursor: hand;" />
                 </VBox>
             </GridPane>
 
@@ -117,14 +126,14 @@
                     <Label text="🔔 Sistem Akışı"
                            style="-fx-font-size: 20px;
                                   -fx-font-weight: bold;
-                                  -fx-text-fill: white;"/>
-                    <Region HBox.hgrow="ALWAYS"/>
+                                  -fx-text-fill: white;" />
+                    <Region HBox.hgrow="ALWAYS" />
                     <Label text="CANLI"
                            style="-fx-background-color: #2ecc71;
                                   -fx-text-fill: white;
                                   -fx-padding: 4 10;
                                   -fx-background-radius: 20;
-                                  -fx-font-size: 10px;"/>
+                                  -fx-font-size: 10px;" />
                 </HBox>
 
                 <ListView fx:id="alertListView"
@@ -133,7 +142,7 @@
                                  -fx-control-inner-background: transparent;
                                  -fx-border-color: transparent;
                                  -fx-background-insets: 0;
-                                 -fx-padding: 0;"/>
+                                 -fx-padding: 0;" />
             </VBox>
 
         </VBox>
@@ -142,69 +151,44 @@
     <StackPane fx:id="modalOverlay"
                visible="false"
                style="-fx-background-color: rgba(0,0,0,0.7);">
+        <!-- Ürün Ekle Modalı içerikleri buraya zaten mevcut -->
+    </StackPane>
 
-        <VBox spacing="20"
-              maxWidth="450"
-              maxHeight="500"
+    <StackPane fx:id="customerModalOverlay"
+               visible="false"
+               style="-fx-background-color: rgba(0,0,0,0.7);">
+        <VBox spacing="20" maxWidth="450" maxHeight="400"
               style="-fx-background-color: white;
                      -fx-padding: 35;
                      -fx-background-radius: 15;
-                     -fx-border-color: transparent;
                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 20, 0, 0, 10);">
 
-            <Label text="Yeni Ürün Ekle"
-                   style="-fx-font-size: 22px;
-                          -fx-font-weight: bold;
-                          -fx-text-fill: #1a202c;"/>
+            <Label text="Yeni Müşteri Ekle (Offline)"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1a202c;" />
 
             <VBox spacing="15">
-                <TextField fx:id="nameField"
-                           promptText="Ürün Adı"
-                           style="-fx-padding: 12;
-                                  -fx-background-radius: 8;
-                                  -fx-border-color: #e2e8f0;
-                                  -fx-border-radius: 8;"/>
-
-                <TextField fx:id="skuField"
-                           promptText="SKU (Barkod)"
-                           style="-fx-padding: 12;
-                                  -fx-background-radius: 8;
-                                  -fx-border-color: #e2e8f0;
-                                  -fx-border-radius: 8;"/>
-
-                <TextField fx:id="priceField"
-                           promptText="Fiyat"
-                           style="-fx-padding: 12;
-                                  -fx-background-radius: 8;
-                                  -fx-border-color: #e2e8f0;
-                                  -fx-border-radius: 8;"/>
-
-                <TextField fx:id="stockField"
-                           promptText="Stok Miktarı"
-                           style="-fx-padding: 12;
-                                  -fx-background-radius: 8;
-                                  -fx-border-color: #e2e8f0;
-                                  -fx-border-radius: 8;"/>
+                <TextField fx:id="customerNameField" promptText="Müşteri Adı Soyadı"
+                           style="-fx-padding: 12; -fx-border-color: #e2e8f0; -fx-border-radius: 8;" />
+                <TextField fx:id="customerEmailField" promptText="E-posta Adresi"
+                           style="-fx-padding: 12; -fx-border-color: #e2e8f0; -fx-border-radius: 8;" />
+                <TextField fx:id="customerPhoneField" promptText="Telefon Numarası"
+                           style="-fx-padding: 12; -fx-border-color: #e2e8f0; -fx-border-radius: 8;" />
             </VBox>
 
             <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button text="İptal"
-                        onAction="#closeModal"
+                <Button text="İptal" onAction="#closeCustomerModal"
                         style="-fx-background-color: #e2e8f0;
                                -fx-padding: 10 20;
                                -fx-background-radius: 8;
-                               -fx-border-color: transparent;
-                               -fx-cursor: hand;"/>
-                <Button text="Ürünü Kaydet"
-                        onAction="#handleQuickAddProduct"
-                        style="-fx-background-color: #1a202c;
+                               -fx-cursor: hand;" />
+                <Button text="Müşteriyi Kaydet" onAction="#handleSaveCustomer"
+                        style="-fx-background-color: #6366f1;
                                -fx-text-fill: white;
                                -fx-padding: 10 20;
                                -fx-background-radius: 8;
-                               -fx-border-color: transparent;
-                               -fx-cursor: hand;"/>
+                               -fx-cursor: hand;" />
             </HBox>
-
         </VBox>
     </StackPane>
+
 </StackPane>

@@ -10,7 +10,13 @@ import { Customers } from "../pages/Customers";
 
 const ProtectedRoute = () => {
   const { token } = useAuth();
-  return token ? <Outlet /> : <Navigate to="/login" />;
+  const storedToken = localStorage.getItem("token");
+
+  if (!token || !storedToken) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <Outlet />;
 };
 
 export const AppRouter = () => {
